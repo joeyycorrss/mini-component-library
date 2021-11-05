@@ -39,7 +39,7 @@ const ProgressBar = ({ value, size }) => {
   const styles = SIZES[size]
   return (
   <Wrapper style={styles.wrapper} role="progressbar" aria-valuenow={value} aria-valuemin="0" aria-valuemax="100">
-    <ValueBar style={styles.valueBar} value={value}/>
+    <ValueBar style={styles.valueBar} value={value} size={size}/>
     <VisuallyHidden>Progress Bar</VisuallyHidden>
   </Wrapper>
   );
@@ -48,7 +48,7 @@ const ProgressBar = ({ value, size }) => {
 const ValueBar = styled.div`
   background-color: ${COLORS.primary};
   padding-block: var(--padding-block);
-  border-radius: ${p => p.value > 99 ? '4px' : '4px 0 0 4px'};
+  border-radius: ${p => (p.size === 'large' && p.value > 99.4) ? '4px' : '4px 0 0 4px'};
   margin-right: ${p => (p.value < 100 && 100 - p.value)}%;
 `
 
@@ -56,6 +56,8 @@ const Wrapper = styled.div`
   box-shadow: inset 0px 2px 4px ${COLORS.transparentGray35};
   border-radius: var(--border-radius);
   padding: var(--padding);
+  /* trim off corners when progress bar is near full */
+  overflow: hidden;
 `
 
 export default ProgressBar;
