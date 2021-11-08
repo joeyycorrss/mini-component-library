@@ -12,6 +12,7 @@ const Select = ({ label, value, onChange, children }) => {
   return (
     <>
       {label && <Label>{label}</Label>}
+      <VisuallyHidden>{label}</VisuallyHidden>
       <ValueWrapper>
         {displayedValue}
         <span><Icon id="chevron-down"/></span>
